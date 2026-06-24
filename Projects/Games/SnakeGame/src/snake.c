@@ -80,8 +80,7 @@ Although this program may compile/ run in Cygwin it runs slowly.
 	int kbhit(void)
 	{
 	  struct termios oldt, newt;
-	  int ch;
-	  int oldf;
+	  int ch, oldf;
 
 	  tcgetattr(STDIN_FILENO, &oldt);
 	  newt = oldt;
@@ -109,13 +108,13 @@ Although this program may compile/ run in Cygwin it runs slowly.
 	{
 		char c;
 		system("stty raw");
-		c= getchar();
+		c = getchar();
 		system("stty sane");
 		//printf("%c",c);
 		return(c);
 	}
 
-	void clrscr()
+	void clearScreen()
 	{
 		system("clear");
 		return;
@@ -129,11 +128,9 @@ Although this program may compile/ run in Cygwin it runs slowly.
 
 char waitForAnyKey(void)
 {
-	int pressed;
-	
 	while(!kbhit());
 	
-	pressed = getch();
+	int pressed = getch();
 	//pressed = tolower(pressed);
 	return((char)pressed);
 }
@@ -141,7 +138,7 @@ char waitForAnyKey(void)
 int getGameSpeed(void)
 {
 	int speed;
-	clrscr();
+	clearScreen();
 	
 	do
 	{
@@ -153,9 +150,7 @@ int getGameSpeed(void)
 }
 
 void pauseMenu(void)
-{
-	int i;
-	
+{	
 	gotoxy(28,23);
 	printf("**Paused**");
 	
@@ -426,7 +421,7 @@ void inputScore(int score) //This seriously needs to be cleaned up
 	
 	int entered = 0;
 	
-	clrscr(); //clear the console
+	clearScreen(); //clear the console
 	
 	if((fp = fopen("highscores.txt", "r")) == NULL)
 	{
@@ -523,7 +518,7 @@ void displayHighScores(void) //NEED TO CHECK THIS CODE!!!
 	char str[128];
 	int y = 5;
 	
-	clrscr(); //clear the console
+	clearScreen(); //clear the console
 	
 	if((fp = fopen("highscores.txt", "r")) == NULL) {
 		//Create the file, then try open it again.. if it fails this time exit.
@@ -574,7 +569,7 @@ void youWinScreen(void)
 	gotoxy(x,y++);	
 	
 	waitForAnyKey();
-	clrscr(); //clear the console
+	clearScreen(); //clear the console
 	return;
 }
 
@@ -618,7 +613,7 @@ void gameOverScreen(void)
 	printf(":.......::::::...:::::........::..:::::..::....::\n");
 	
 	waitForAnyKey();
-	clrscr(); //clear the console
+	clearScreen(); //clear the console
 	return;
 }
 
@@ -727,10 +722,9 @@ void startGame( int snakeXY[][SNAKE_ARRAY_SIZE], int foodXY[], int consoleWidth,
 
 void loadEnviroment(int consoleWidth, int consoleHeight)//This can be done in a better way... FIX ME!!!! Also i think it doesn't work properly in ubuntu <- Fixed
 {
-	int i;
-	int x = 1, y = 1;
+	int i, x = 1, y = 1;
 	int rectangleHeight = consoleHeight - 4;
-	clrscr(); //clear the console
+	clearScreen(); //clear the console
 	
 	gotoxy(x,y); //Top left corner
 	
@@ -919,7 +913,7 @@ int menuSelector(int x, int y, int yStart)
 
 void welcomeArt(void)
 {
-	clrscr(); //clear the console
+	clearScreen(); //clear the console
 	//Ascii art reference: http://www.chris.com/ascii/index.php?art=animals/reptiles/snakes
 	printf("\n");	
 	printf("\t\t    _________         _________ 			\n");	
@@ -944,7 +938,7 @@ void welcomeArt(void)
 void controls(void)
 {
 	int x = 10, y = 5;
-	clrscr(); //clear the console
+	clearScreen(); //clear the console
 	gotoxy(x,y++);
 	printf("Controls\n");
 	gotoxy(x++,y++);
@@ -975,13 +969,12 @@ void exitYN(void)
 	
 	do
 	{
-		pressed = waitForAnyKey();
-		pressed = tolower(pressed);
+		pressed = tolower(waitForAnyKey());
 	} while (!(pressed == 'y' || pressed == 'n'));
 	
 	if (pressed == 'y')
 	{
-		clrscr(); //clear the console
+		clearScreen(); //clear the console
 		exit(1);
 	}
 	return;
@@ -994,7 +987,7 @@ int mainMenu(void)
 	
 	int selected;
 	
-	clrscr(); //clear the console
+	clearScreen(); //clear the console
 	//Might be better with arrays of strings???
 	gotoxy(x,y++);
 	printf("New Game\n");
