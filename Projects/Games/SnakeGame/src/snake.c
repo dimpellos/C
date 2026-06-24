@@ -163,12 +163,10 @@ void pauseMenu(void)
 
 //This function checks if a key has pressed, then checks if its any of the arrow keys/ p/esc key. It changes direction acording to the key pressed.
 int checkKeysPressed(int direction)
-{
-	int pressed;
-	
+{	
 	if(kbhit()) //If a key has been pressed
 	{
-		pressed=getch();
+		int pressed=getch();
 		if (direction != pressed)
 		{
 			if(pressed == DOWN_ARROW && direction != UP_ARROW)
@@ -190,8 +188,7 @@ int checkKeysPressed(int direction)
 //One thing to note, a snake of length 4 cannot collide with itself, therefore there is no need to call this function when the snakes length is <= 4
 int collisionSnake (int x, int y, int snakeXY[][SNAKE_ARRAY_SIZE], int snakeLength, int detect)
 {
-	int i;
-	for (i = detect; i < snakeLength; i++) //Checks if the snake collided with itself
+	for (int i = detect; i < snakeLength; ++i) //Checks if the snake collided with itself
 	{
 		if ( x == snakeXY[0][i] && y == snakeXY[1][i])
 			return(1);
@@ -202,8 +199,6 @@ int collisionSnake (int x, int y, int snakeXY[][SNAKE_ARRAY_SIZE], int snakeLeng
 //Generates food & Makes sure the food doesn't appear on top of the snake <- This sometimes causes a lag issue!!! Not too much of a problem tho
 int generateFood(int foodXY[], int width, int height, int snakeXY[][SNAKE_ARRAY_SIZE], int snakeLength)
 {
-	int i;
-	
 	do
 	{
 		srand ( time(NULL) );
@@ -236,8 +231,7 @@ Becomes This:
 */
 void moveSnakeArray(int snakeXY[][SNAKE_ARRAY_SIZE], int snakeLength, int direction)
 {
-	int i;
-	for( i = snakeLength-1; i >= 1; i-- )
+	for(int i = snakeLength-1; i >= 1; i--)
 	{
 		snakeXY[0][i] = snakeXY[0][i-1];
 		snakeXY[1][i] = snakeXY[1][i-1];
@@ -343,7 +337,6 @@ void refreshInfoBar(int score, int speed)
 void createHighScores(void)
 {
 	FILE *file; 
-	int i;
 
 	file = fopen("highscores.txt","w+");
 	
@@ -353,7 +346,7 @@ void createHighScores(void)
 		exit(0);	
 	}
 	
-	for(i = 0; i < 5; i++)
+	for(int i = 0; i < 5; i++)
 	{
 		fprintf(file,"%d",i+1);
 		fprintf(file,"%s","\t0\t\t\tEMPTY\n");
@@ -367,9 +360,7 @@ int getLowestScore()
 {
 	FILE *fp;
 	char str[128];
-	int lowestScore = 0;
-	int i;
-	int intLength;
+	int lowestScore = 0, intLength;
 	
 	if((fp = fopen("highscores.txt", "r")) == NULL)
 	{
@@ -385,7 +376,7 @@ int getLowestScore()
 	}
 	fclose(fp);	
 	
-	i=0;
+	int i = 0;
 	
 	//Gets the Int length
 	while(str[2+i] != '\t')
