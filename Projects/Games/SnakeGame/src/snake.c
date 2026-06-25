@@ -325,7 +325,7 @@ void refreshInfoBar(int score, int speed)
 	printf("Coder: Dimitrios Bellos");
 
 	gotoxy(52,24);
-	printf("Version: 0.5");
+	printf("Version: 0.6");
 	
 	return;
 }
