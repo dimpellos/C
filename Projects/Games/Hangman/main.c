@@ -24,7 +24,7 @@ int main(void) {
         size_t len = strlen(unknown); 
         guess = realloc(guess, len + 1); 
 
-        for(int i = 0; i < len; ++i) guess[i] = '_'; 
+        for(size_t i = 0; i < len; ++i) guess[i] = '_'; 
         guess[len] = 0; 
 
         do { 
