@@ -28,4 +28,8 @@ $(TARGET): $(OBJS)
 clean:
 	rm -f $(OBJS) $(TARGET)
 
-.PHONY: all clean
+# New 'play' target: build and run the game
+play: $(TARGET)
+	./$(TARGET)
+
+.PHONY: all clean play
