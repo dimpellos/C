@@ -156,7 +156,7 @@ int main() {
 			if (game->Get_Remained() == 0 && !game->end) {
 				Victory(game, sound);
 			}
-			Sleep(10);
+			std::this_thread::sleep_for(std::chrono::milliseconds(10));
 		}
 	}
 	catch (Game::GAME_EXCEPTION& exception) {

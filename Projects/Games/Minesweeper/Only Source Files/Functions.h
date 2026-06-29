@@ -3,9 +3,12 @@
 #include "Game.h"
 #include "Sound.h"
 
+#ifdef _WIN32
 #include <Windows.h>
 #include <Time.h>
+#endif
 #include <thread>
+#include <chrono>
 
 void thread(Game* game);
 bool range(int from, int n, int to);
