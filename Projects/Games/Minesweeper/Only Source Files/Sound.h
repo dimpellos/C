@@ -11,6 +11,9 @@ private:
 	Mix_Chunk* duckSound = nullptr;
 	Mix_Chunk* errorSound = nullptr;
 	Mix_Chunk* victorySound = nullptr;
+
+	int volume = 5;
+    void playChunk(Mix_Chunk* chunk, int vol);
 public:
 	Sound();
 	~Sound();
